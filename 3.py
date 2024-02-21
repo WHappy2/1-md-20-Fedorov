@@ -1,5 +1,5 @@
 a = int(input())
-if (a % 2 == 0 and a%100 != 0) and (a%400 == 0):
-    print('Высокосный')
+if (a % 2 == 0 and a % 100 != 0) or (a % 400 == 0):
+    print('високосный')
 else:
     print('обычный')

@@ -3,5 +3,5 @@ words = []
 for i in range(a):
     word = input('Введите слово')
     words.append(word)
-results = ''.join(words)
+results = ' '.join(words)
 print(results)

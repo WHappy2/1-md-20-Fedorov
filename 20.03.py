@@ -1,15 +1,11 @@
-def a(b):
-    if b % 5 ==0:
-        return True
+def Zadanya1(ba):
+    if ba % 5 ==0:
+        result = ba,'Делиться на 5'
     else:
-        return False
-b = int(input())
-if a(b):
-    print(b,'Делиться на 5')
-else:
-    print(b,'Не делиться на 5')
+        result = ba,'Не делиться на 5'
+    return result
 
-def a2():
+def Zadanya2():
     try:
         b = int(input())
         result = 300/b
@@ -18,36 +14,58 @@ def a2():
         print('Ошибка:введено не полное число')
     except ZeroDivisionError:
         print('Ошибка:на 0 делить нельзя')
-a2()
 
-def a3(date):
-    try:
-        day,month,year = map(int,date.split('/'))
-        if day*month == year % 100:
-            return True
-        else:
+
+def Zadanya3():
+    def a(date):
+        try:
+            day, month, year = map(int, date.split('/'))
+            if day+month >= year % 100:
+                return True
+            else:
+                return False
+        except ValueError:
             return False
-    except ValueError:
-        return False
-date = input('Введите дату')
-if a3(date):
-    print('Магичекая дата')
-else:
-    print('Немагическая дата')
+        except MagicError as e:
+            print(e)
 
-def a4(luck):
-    tnumber=str(luck)
-    if len(luck) % 2 != 0:
-        return False
-    hl = len(luck) // 2
-    fhs = 0
-    sfs = 0
-    for i in range(hl):
-        fhs += int(luck[i])
-        sfs += int(luck[i])
-    return fhs == sfs
-luck=input('Введите номер билета')
-if a4(luck):
-    print('Это счастливый билет')
+    date = input('Введите дату')
+    if a(date):
+        print('Магическая')
+    else:
+        print('Немагическая')
+
+
+def Zadanya4():
+    def a(luck):
+
+        tiket_number=str(luck)
+        if len(luck) % 2 != 0:
+            return False
+        hl = len(luck) // 2
+        fhs = 0
+        shs = 0
+        for i in range(hl):
+            fhs += int(luck[i])
+            shs += int(luck[i])
+        return fhs == shs
+
+    luck = input('Введите номер билета')
+    if a(luck):
+        print('')
+    else:
+        print('')
+
+task = int(input('Введите номер задания'))
+if task == 1:
+    print(Zadanya1(int(input())))
+elif task == 2:
+    Zadanya2()
+elif task ==3:
+    print(Zadanya3())
+elif task == 4:
+    Zadanya4()
 else:
-    print('Это не счастливый билет')
+    print('Такого нет')
+
+

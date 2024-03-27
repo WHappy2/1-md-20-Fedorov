@@ -6,9 +6,9 @@ wl = []
 wrl = []
 for i in wi:
     wl.append((days[i]))
-for day in days:
-    if day not in wl:
-        wrl.append((day))
+for x in days:
+    if x not in wl:
+        wrl.append((x))
 print('выходные')
 print('\n'.join(wl))
 print('рабочие')

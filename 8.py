@@ -1,21 +1,35 @@
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
-# Загрузка и обрезка изображения
-def crop_image(input_path, output_path, crop_box):
-    image = Image.open(input_path)
-    cropped_image = image.crop(crop_box)
-    cropped_image.save(output_path)
-    return output_path
+# Путь к исходному изображению
+image_path = r'C:\1-md-20-Fedorov\osiris-logo.jpg'  # Замените на путь к вашему изображению
 
-# Показ открытки на экране
-def show_card(image_path):
-    image = Image.open(image_path)
-    image.show()
+# Загрузка изображения
+image = Image.open('osiris-logo.jpg')
 
-# Обрезка изображения
-input_image_path = 'C:\1-md-20-Fedorov\osiris-logo.jpg'  # Укажите путь к вашему изображению
-output_image_path = 'cropped_image.jpg'  # Укажите новое имя файла
-crop_box = (100, 100, 400, 400)  # Укажите координаты в соответствии с вашими требованиями
-cropped_image_path = crop_image(input_image_path, output_image_path, crop_box)
+# Определение области для обрезки (left, upper, right, lower)
+crop_box = (100, 100, 400, 400)  # Задайте координаты в соответствии с вашими требованиями
+cropped_image = image.crop(crop_box)
 
+# Спросите у пользователя имя
+name_to_congratulate = input("Введите имя того, кого вы хотите поздравить: ")
+
+# Добавление текста на открытку
+draw = ImageDraw.Draw(cropped_image)
+font = ImageFont.truetype("arial.ttf", 20)  # Укажите путь к шрифту и размер
+text = f"{name_to_congratulate}, поздравляю!"
+
+# Вычисление позиции текста
+text_width, text_height = draw.textsize(text, font=font)
+text_x = (cropped_image.width - text_width) / 2
+text_y = 20  # Отступ сверху
+
+# Рисование текста
+draw.text((text_x, text_y), text, font=font, fill="black")  # Выберите цвет текста
+
+# Сохранение новой открытки
+new_card_path = 'congratulation_card.png'  # Сохранение в формате PNG
+cropped_image.save(new_card_path)
+
+# Показать открытку
+cropped_image.show()
 

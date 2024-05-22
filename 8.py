@@ -4,7 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 image_path = r'C:\1-md-20-Fedorov\osiris-logo.jpg'  # Замените на путь к вашему изображению
 
 # Загрузка изображения
-image = Image.open('osiris-logo.jpg')
+image = Image.open(image_path)
 
 # Определение области для обрезки (left, upper, right, lower)
 crop_box = (100, 100, 400, 400)  # Задайте координаты в соответствии с вашими требованиями
@@ -15,11 +15,13 @@ name_to_congratulate = input("Введите имя того, кого вы хо
 
 # Добавление текста на открытку
 draw = ImageDraw.Draw(cropped_image)
-font = ImageFont.truetype("arial.ttf", 20)  # Укажите путь к шрифту и размер
-text = f"{name_to_congratulate}, поздравляю!"
+# Убедитесь, что файл шрифта arial.ttf находится в доступном месте или используйте другой шрифт
+font_path = "arial.ttf"  # Или путь к другому файлу шрифта, если он не в стандартном месте
+font = ImageFont.truetype(font_path, 20)
 
 # Вычисление позиции текста
-text_width, text_height = draw.textsize(text, font=font)
+# Используем метод getsize объекта font для получения размера текста
+text_width, text_height = font.getsize(text)
 text_x = (cropped_image.width - text_width) / 2
 text_y = 20  # Отступ сверху
 
@@ -32,4 +34,3 @@ cropped_image.save(new_card_path)
 
 # Показать открытку
 cropped_image.show()
-
